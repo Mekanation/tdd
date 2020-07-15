@@ -14,7 +14,7 @@ public class Store {
     }
 
     public void addToCart(Products product){
-
+        cart.add(product);
     }
 
     public List<Products> getCart() {
@@ -24,7 +24,7 @@ public class Store {
     public String cartContains(String itemToFind) {
         for (Products product : cart) {
             if (product.getProductName().equals(itemToFind)) {
-                return product.toString();
+                return product.getProductName();
             } else {
                 return "Item not found";
             }
