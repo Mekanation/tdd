@@ -11,7 +11,7 @@ class StoreTest {
     public void returnsNoResultsWhenNoProductsArePurchased() throws Exception {
         Store store = new Store();
         List<Products> empty = new ArrayList<>();
-        List<Products> results = store.purchaseCart(empty);
+        List<Products> results = store.purchaseProducts(empty);
 
         assertEquals(0,results.size());
     }
