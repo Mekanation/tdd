@@ -17,4 +17,14 @@ class StoreTest {
     }
 
 
+    @Test
+    public void returnsProductWhenProductIsPurchased() throws Exception{
+        Store store = new Store();
+        store.addToCart(new Products("Book"));
+
+        List<Products> results = store.purchaseProducts(store.getCart());
+        assertEquals("Book", store.cartContains("Book"));
+    }
+
+
 }
