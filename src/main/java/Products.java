@@ -6,4 +6,8 @@ public class Products {
     public Products(String productName) {
         this.productName = productName;
     }
+
+    public String getProductName() {
+        return productName;
+    }
 }
