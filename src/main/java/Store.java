@@ -2,15 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    private List<Products> productsList;
+    private static ArrayList<Products> productsOnShelf;
     private static Store instance = null;
     private ArrayList<Carts> carts;
 
 
 
     private Store() {
-        productsList = new ArrayList<>();
+        productsOnShelf = new ArrayList<>();
         carts = new ArrayList<>();
+    }
+
+    public static Products getProductOffShelf(int productID) {
+        for(Products product : productsOnShelf){
+            if(product.getProductID() == productID){
+                return product;
+            }
+        }
+        return null;
 
     }
 
@@ -19,16 +28,20 @@ public class Store {
         return list;
     }
 
-    public void addToCart(Products product){
-        productsList.add(product);
+    public void addToShelf(Products product){
+        productsOnShelf.add(product);
     }
 
-    public List<Products> getProductsList() {
-        return productsList;
+    public List<Products> getProductsOnShelf() {
+        return productsOnShelf;
+    }
+
+    public List<Carts> getCartsInStore(){
+        return carts;
     }
 
     public String cartContains(String productName) {
-        for (Products product : productsList) {
+        for (Products product : productsOnShelf) {
             if (product.getProductName().equals(productName)) {
                 return product.getProductName();
             } else {
@@ -40,7 +53,7 @@ public class Store {
     }
 
     public double getProductPrice(String productName) {
-        for(Products product : productsList){
+        for(Products product : productsOnShelf){
             if(product.getProductName().equals(productName)){
                 return product.getProductPrice();
             }
@@ -49,7 +62,7 @@ public class Store {
     }
 
     public double getProductTotal(String productName) {
-        for(Products product : productsList){
+        for(Products product : productsOnShelf){
             if(product.getProductName().equals(productName)){
                 return product.getRoundedPrice(product.getPriceWithTax());
             }
@@ -64,7 +77,7 @@ public class Store {
     }
 
     public int getProductIDinCart(String productName) {
-        for(Products product : productsList){
+        for(Products product : productsOnShelf){
             if(product.getProductName().equals(productName)){
                 return product.getProductID();
             }
@@ -72,7 +85,7 @@ public class Store {
         return 0;
     }
 
-    public void createShoppingCart(Carts cart) {
+    public void addShoppingCartToStore(Carts cart) {
         carts.add(cart);
     }
 
@@ -84,8 +97,6 @@ public class Store {
         }
         return "Cart not in Store";
     }
-
-
 
 
 }

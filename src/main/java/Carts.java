@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class Carts {
     private int ID;
     private String name;
+    private ArrayList<Products> productsInCart;
 
     public Carts(int ID, String name) {
         this.ID = ID;
@@ -16,4 +19,16 @@ public class Carts {
     }
 
 
+    public boolean containsProduct(String productName) {
+        for(Products product : productsInCart){
+            if(product.getProductName().equals(productName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addProductToCart(Products product){
+        productsInCart.add(product);
+    }
 }
