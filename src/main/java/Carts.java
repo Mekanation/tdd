@@ -37,7 +37,7 @@ public class Carts {
 
     public double purchaseCart() {
         for(Products product : productsInCart){
-           total += product.getPriceWithTax();
+           total += product.getTaxes() + product.getProductPrice();
         }
         return Math.round(total * 100.00) / 100.00;
     }

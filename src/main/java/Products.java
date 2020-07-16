@@ -34,19 +34,19 @@ public class Products {
         return productPrice;
     }
 
-    public double getPriceWithTax() {
-        double RoundedSalesTax = Math.round((productPrice * .10) * 20.00) / 20.00;
-        double RoundedImportTax = Math.round((productPrice * .05) * 20.00) / 20.00;
-
-        if(imported && exempt){
-            return RoundedImportTax + productPrice;
-        }else if(imported){
-            return RoundedImportTax + RoundedSalesTax + productPrice;
-        }else if(exempt){
-            return productPrice;
-        }
-        return productPrice + RoundedSalesTax;
-    }
+//    public double getPriceWithTax() {
+//        double RoundedSalesTax = Math.round((productPrice * .10) * 20.00) / 20.00;
+//        double RoundedImportTax = Math.round((productPrice * .05) * 20.00) / 20.00;
+//
+//        if(imported && exempt){
+//            return RoundedImportTax + productPrice;
+//        }else if(imported){
+//            return RoundedImportTax + RoundedSalesTax + productPrice;
+//        }else if(exempt){
+//            return productPrice;
+//        }
+//        return productPrice + RoundedSalesTax;
+//    }
 
     public double roundToTenths(double productPrice){
         return Math.round(productPrice * 100.00) / 100.00;

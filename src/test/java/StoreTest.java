@@ -66,8 +66,17 @@ class StoreTest {
     @Order(5)
     public void returnsProductTax() {
         try {
-            assertEquals(12.49, Products.book.getPriceWithTax());
-            assertEquals(16.49, Products.music_cd.roundToTenths(Products.music_cd.getPriceWithTax()));
+            assertEquals(12.49,
+                        Products.book.roundToTenths(
+                        Products.book.getProductPrice() +
+                        Products.book.getTaxes())
+            );
+
+            assertEquals(16.49,
+                            Products.music_cd.roundToTenths(
+                            Products.music_cd.getProductPrice() +
+                            Products.music_cd.getTaxes())
+            );
         } catch (final RuntimeException e) {
             fail();
         }
@@ -77,7 +86,11 @@ class StoreTest {
     @Test
     @Order(6)
     public void returnsProductTaxAndImportTax() {
-        assertEquals(54.65, Products.imported_bottle_of_perfume.roundToTenths(Products.imported_bottle_of_perfume.getPriceWithTax()));;
+        assertEquals(54.65,
+                Products.imported_bottle_of_perfume.roundToTenths(
+                Products.imported_bottle_of_perfume.getProductPrice() +
+                Products.imported_bottle_of_perfume.getTaxes())
+        );
     }
 
     @Test
