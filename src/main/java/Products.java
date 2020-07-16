@@ -35,21 +35,17 @@ public class Products {
     }
 
     public double getPriceWithTax() {
-        double unRoundedSalesTax = (productPrice * .10);
-        double unRoundedImportTax = (productPrice * .05);
+        double RoundedSalesTax = Math.round((productPrice * .10) * 20.00) / 20.00;
+        double RoundedImportTax = Math.round((productPrice * .05) * 20.00) / 20.00;
 
         if(imported && exempt){
-            return unRoundedImportTax + productPrice;
+            return RoundedImportTax + productPrice;
         }else if(imported){
-            return unRoundedImportTax + unRoundedSalesTax + productPrice;
+            return RoundedImportTax + RoundedSalesTax + productPrice;
         }else if(exempt){
             return productPrice;
         }
-        return productPrice + unRoundedSalesTax;
-    }
-
-    public double getRoundedPrice(Double unroundedPrice){
-        return Math.round(unroundedPrice * 20.00) / 20.00;
+        return productPrice + RoundedSalesTax;
     }
 
     public boolean getExemptionStatus(){
@@ -61,5 +57,18 @@ public class Products {
 
     public int getProductID() {
         return productID;
+    }
+
+    public double getTaxes() {
+        double unRoundedSalesTax = (productPrice * .10);
+        double unRoundedImportTax = (productPrice * .05);
+
+        if(imported && exempt){
+            return unRoundedImportTax;
+        }else if(imported){
+            return unRoundedImportTax + unRoundedSalesTax;
+        }
+        return unRoundedSalesTax;
+
     }
 }

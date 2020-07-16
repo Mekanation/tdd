@@ -69,8 +69,8 @@ class StoreTest {
     @Order(5)
     public void returnsProductTaxWhenProductIsChosen() {
         try {
-            assertEquals(12.50, store.getProductTotal("Book"));
-            assertEquals(16.50, store.getProductTotal("music CD"));
+            assertEquals(12.49, store.getProductTotal("Book"));
+            assertEquals(16.49, store.getProductTotal("music CD"));
         } catch (final RuntimeException e) {
             fail();
         }
@@ -82,7 +82,7 @@ class StoreTest {
     public void returnsProductTaxAndImportTaxWhenProductIsChosen() {
 
         assertEquals(54.65, store.getProductTotal("imported bottle of perfume"));
-        assertEquals(16.50, store.getProductTotal("music CD"));
+        assertEquals(16.49, store.getProductTotal("music CD"));
     }
 
     @Test
@@ -133,13 +133,29 @@ class StoreTest {
             julie.addProductToCart(Store.getProductOffShelf(1));
 
             for (Carts cart : store.getCartsInStore()) {
-                if (cart.getName() == "Julie") {
-                    assertEquals(true, cart.containsProduct("Book"));
+                if (cart.getName().equals("Julie")) {
+                    assertTrue(cart.containsProduct("Book"));
                 }
             }
 
         } catch (final RuntimeException e) {
             fail();
+        }
+    }
+
+    @Test
+    @Order(11)
+    public void cartCanTotalProducts(){
+        try{
+            Carts frank = new Carts(4, "Frank");
+            store.addShoppingCartToStore(frank);
+            frank.addProductToCart(Store.getProductOffShelf(1));
+            frank.addProductToCart(Store.getProductOffShelf(2));
+            frank.addProductToCart(Store.getProductOffShelf(3));
+            assertEquals(29.83, frank.purchaseCart());
+
+        }catch (final RuntimeException e){
+            fail(e);
         }
     }
 

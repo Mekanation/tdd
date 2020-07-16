@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Store {
     private static ArrayList<Products> productsOnShelf;
@@ -23,7 +22,7 @@ public class Store {
 
     }
 
-    public List<Products> purchaseProducts(List<Products> list) {
+    public ArrayList<Products> purchaseProducts(ArrayList<Products> list) {
 
         return list;
     }
@@ -32,11 +31,11 @@ public class Store {
         productsOnShelf.add(product);
     }
 
-    public List<Products> getProductsOnShelf() {
+    public ArrayList<Products> getProductsOnShelf() {
         return productsOnShelf;
     }
 
-    public List<Carts> getCartsInStore(){
+    public ArrayList<Carts> getCartsInStore(){
         return carts;
     }
 
@@ -64,7 +63,7 @@ public class Store {
     public double getProductTotal(String productName) {
         for(Products product : productsOnShelf){
             if(product.getProductName().equals(productName)){
-                return product.getRoundedPrice(product.getPriceWithTax());
+                return Math.round(product.getPriceWithTax() * 100.0) / 100.0;
             }
         }
         return 0.00;
