@@ -23,5 +23,12 @@ class StoreTest {
         assertEquals("Book", store.cartContains("Book"));
     }
 
+    @Test
+    public void returnsProductPriceWhenProductIsChosen() throws Exception{
+        Store store = new Store();
+        store.addToCart(new Products("Book"));
+        assertEquals(12.49,store.getProductPrice());
+    }
+
 
 }

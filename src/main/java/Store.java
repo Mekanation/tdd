@@ -32,4 +32,8 @@ public class Store {
 
         return "This item: " + itemToFind + "was not found in the cart";
     }
+
+    public double getProductPrice() {
+        return 0.00;
+    }
 }
