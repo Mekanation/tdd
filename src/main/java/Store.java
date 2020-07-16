@@ -39,7 +39,7 @@ public class Store {
         return carts;
     }
 
-    public String cartContains(String productName) {
+    public String shelfContains(String productName) {
         for (Products product : productsOnShelf) {
             if (product.getProductName().equals(productName)) {
                 return product.getProductName();

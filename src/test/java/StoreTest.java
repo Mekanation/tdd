@@ -47,7 +47,7 @@ class StoreTest {
     @Order(3)
     public void returnsProductWhenProductIsSearched() {
         try {
-            assertEquals("Book", store.cartContains("Book"));
+            assertEquals("Book", store.shelfContains("Book"));
         } catch (final RuntimeException e) {
             fail();
         }
@@ -58,7 +58,7 @@ class StoreTest {
     @Order(4)
     public void returnsProductPriceWhenProductIsChosen() {
         try {
-            assertEquals(12.49, store.getProductPrice("Book"));
+            assertEquals(12.49, Products.book.getProductPrice());
         } catch (final RuntimeException e) {
             fail();
         }
@@ -69,8 +69,8 @@ class StoreTest {
     @Order(5)
     public void returnsProductTaxWhenProductIsChosen() {
         try {
-            assertEquals(12.49, store.getProductTotal("Book"));
-            assertEquals(16.49, store.getProductTotal("music CD"));
+            assertEquals(12.49, Products.book.getPriceWithTax());
+            assertEquals(16.49, Products.music_cd.roundToTenths(Products.music_cd.getPriceWithTax()));
         } catch (final RuntimeException e) {
             fail();
         }
@@ -80,9 +80,7 @@ class StoreTest {
     @Test
     @Order(6)
     public void returnsProductTaxAndImportTaxWhenProductIsChosen() {
-
-        assertEquals(54.65, store.getProductTotal("imported bottle of perfume"));
-        assertEquals(16.49, store.getProductTotal("music CD"));
+        assertEquals(54.65, Products.imported_bottle_of_perfume.roundToTenths(Products.imported_bottle_of_perfume.getPriceWithTax()));;
     }
 
     @Test
@@ -158,6 +156,7 @@ class StoreTest {
             fail(e);
         }
     }
+
 
 
 

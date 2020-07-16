@@ -1,11 +1,11 @@
 public class Products {
 
 
-    private String productName;
-    private double productPrice;
-    private boolean exempt;
-    private boolean imported;
-    private int productID;
+    private final String productName;
+    private final double productPrice;
+    private final boolean exempt;
+    private final boolean imported;
+    private final int productID;
 
     private Products(int productID, String productName, double productPrice, boolean exempt, boolean imported) {
         this.productID = productID;
@@ -48,13 +48,9 @@ public class Products {
         return productPrice + RoundedSalesTax;
     }
 
-    public boolean getExemptionStatus(){
-        return exempt;
+    public double roundToTenths(double productPrice){
+        return Math.round(productPrice * 100.00) / 100.00;
     }
-    public boolean getImportStatus(){
-        return imported;
-    }
-
     public int getProductID() {
         return productID;
     }
