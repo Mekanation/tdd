@@ -8,6 +8,7 @@ public class Store {
 
     private Store() {
         cart = new ArrayList<>();
+
     }
 
     public List<Products> purchaseProducts(List<Products> list) {
