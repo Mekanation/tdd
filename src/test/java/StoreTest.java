@@ -3,8 +3,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -14,10 +12,9 @@ class StoreTest {
 
     @Test
     @Order(1)
-    public void returnsNoResultsWhenNoProductsArePurchased() {
+    public void checksIfShelfIsNull() {
         try {
-            List<Products> results = store.purchaseProducts(store.getProductsOnShelf());
-            assertEquals(0, results.size());
+            assertNotNull(store.getProductsOnShelf());
         } catch (final RuntimeException e) {
             fail();
         }
