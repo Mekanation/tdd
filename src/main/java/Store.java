@@ -21,19 +21,33 @@ public class Store {
         return cart;
     }
 
-    public String cartContains(String itemToFind) {
+    public String cartContains(String productName) {
         for (Products product : cart) {
-            if (product.getProductName().equals(itemToFind)) {
+            if (product.getProductName().equals(productName)) {
                 return product.getProductName();
             } else {
                 return "Item not found";
             }
         }
 
-        return "This item: " + itemToFind + "was not found in the cart";
+        return "This item: " + productName + "was not found in the cart";
     }
 
-    public double getProductPrice() {
+    public double getProductPrice(String productName) {
+        for(Products product : cart){
+            if(product.getProductName().equals(productName)){
+                return product.getProductPrice();
+            }
+        }
+        return 0.00;
+    }
+
+    public double getProductTotal(String productName) {
+        for(Products product : cart){
+            if(product.getProductName().equals(productName)){
+                return product.getPriceWithTax();
+            }
+        }
         return 0.00;
     }
 }
