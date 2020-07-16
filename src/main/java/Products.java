@@ -4,11 +4,13 @@ public class Products {
     private String productName;
     private double productPrice;
     private boolean exempt;
+    private boolean imported;
 
-    public Products(String productName, double productPrice, boolean exempt) {
+    public Products(String productName, double productPrice, boolean exempt, boolean imported) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.exempt = exempt;
+        this.imported = imported;
     }
 
     public String getProductName() {
@@ -20,13 +22,27 @@ public class Products {
     }
 
     public double getPriceWithTaxRounded() {
-        if(exempt){
+        double unRoundedSalesTax = (productPrice * .10);
+        double unRoundedImportTax = (productPrice * .05);
+
+        if(imported && exempt){
+            return unRoundedImportTax + productPrice;
+        }else if(imported){
+            return unRoundedImportTax + unRoundedSalesTax + productPrice;
+        }else if(exempt){
             return productPrice;
         }
-        return  Math.round(((productPrice * .10) + productPrice) * 20.00) / 20.00;
+        return productPrice + unRoundedSalesTax;
+    }
+
+    public double getRoundedPrice(Double unroundedPrice){
+        return Math.round(unroundedPrice * 20.00) / 20.00;
     }
 
     public boolean getExemptionStatus(){
         return exempt;
+    }
+    public boolean getImportStatus(){
+        return imported;
     }
 }

@@ -45,7 +45,7 @@ public class Store {
     public double getProductTotal(String productName) {
         for(Products product : cart){
             if(product.getProductName().equals(productName)){
-                return product.getPriceWithTaxRounded();
+                return product.getRoundedPrice(product.getPriceWithTaxRounded());
             }
         }
         return 0.00;
