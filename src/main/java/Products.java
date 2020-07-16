@@ -21,7 +21,7 @@ public class Products {
         return productPrice;
     }
 
-    public double getPriceWithTaxRounded() {
+    public double getPriceWithTax() {
         double unRoundedSalesTax = (productPrice * .10);
         double unRoundedImportTax = (productPrice * .05);
 

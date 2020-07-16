@@ -3,8 +3,10 @@ import java.util.List;
 
 public class Store {
     private List<Products> cart;
+    private static Store instance = null;
 
-    public Store() {
+
+    private Store() {
         cart = new ArrayList<>();
     }
 
@@ -45,9 +47,15 @@ public class Store {
     public double getProductTotal(String productName) {
         for(Products product : cart){
             if(product.getProductName().equals(productName)){
-                return product.getRoundedPrice(product.getPriceWithTaxRounded());
+                return product.getRoundedPrice(product.getPriceWithTax());
             }
         }
         return 0.00;
+    }
+    public static Store getInstance(){
+        if(instance == null){
+            instance = new Store();
+        }
+        return instance;
     }
 }
