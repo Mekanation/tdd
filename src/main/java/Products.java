@@ -56,15 +56,19 @@ public class Products {
     }
 
     public double getTaxes() {
-        double unRoundedSalesTax = (productPrice * .10);
-        double unRoundedImportTax = (productPrice * .05);
+        double RoundedSalesTax = Math.round((productPrice * .10) * 20.00) /20.00;
+        double RoundedImportTax = Math.round((productPrice * .05) * 20.00) /20.00;
 
         if(imported && exempt){
-            return unRoundedImportTax;
+            return RoundedImportTax;
         }else if(imported){
-            return unRoundedImportTax + unRoundedSalesTax;
+            return RoundedImportTax + RoundedSalesTax;
+        }else if(exempt){
+            return 0.00;
         }
-        return unRoundedSalesTax;
+        return RoundedSalesTax;
 
     }
+
+
 }

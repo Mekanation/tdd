@@ -41,20 +41,23 @@ public class Carts {
         }
         return Math.round(total * 100.00) / 100.00;
     }
-    public double cartTaxes(){
+    public double getCartTaxes(){
         for(Products product : productsInCart){
-            taxes += product.getTaxes();
+            taxes += product.roundToTenths(product.getTaxes());
         }
         return taxes;
     }
 
-    public double getTaxes() {
-        return taxes;
+    public ArrayList<Products> getProductList() {
+        return productsInCart;
+
     }
 
-    public double getTotal() {
-        return total;
+    @Override
+    public String toString() {
+        for(Products products : productsInCart){
+            System.out.println("Price: " + products.getProductPrice() + "Taxes:" + products.getTaxes());
+        }
+        return "done";
     }
-
-
 }

@@ -14,7 +14,7 @@ class StoreTest {
     @Order(1)
     public void checksIfShelfIsNull() {
         try {
-            assertNotNull(store.getProductsOnShelf());
+            assertNotNull(store.getAllProducts());
         } catch (final RuntimeException e) {
             fail();
         }
@@ -53,7 +53,7 @@ class StoreTest {
 
     @Test
     @Order(4)
-    public void returnsProductPriceWhenProductIsChosen() {
+    public void returnsProductPrice() {
         try {
             assertEquals(12.49, Products.book.getProductPrice());
         } catch (final RuntimeException e) {
@@ -64,7 +64,7 @@ class StoreTest {
 
     @Test
     @Order(5)
-    public void returnsProductTaxWhenProductIsChosen() {
+    public void returnsProductTax() {
         try {
             assertEquals(12.49, Products.book.getPriceWithTax());
             assertEquals(16.49, Products.music_cd.roundToTenths(Products.music_cd.getPriceWithTax()));
@@ -76,7 +76,7 @@ class StoreTest {
 
     @Test
     @Order(6)
-    public void returnsProductTaxAndImportTaxWhenProductIsChosen() {
+    public void returnsProductTaxAndImportTax() {
         assertEquals(54.65, Products.imported_bottle_of_perfume.roundToTenths(Products.imported_bottle_of_perfume.getPriceWithTax()));;
     }
 
@@ -124,13 +124,16 @@ class StoreTest {
     public void productsCanBeAddedToDifferentCarts() {
         try {
             Carts julie = new Carts(3, "Julie");
+            Carts john = new Carts(5, "John");
             store.addShoppingCartToStore(julie);
+            store.addShoppingCartToStore(john);
             julie.addProductToCart(Store.getProductOffShelf(1));
-
+            john.addProductToCart(Store.getProductOffShelf(1));
             for (Carts cart : store.getCartsInStore()) {
-                if (cart.getName().equals("Julie")) {
+                if(cart.getName().equals("Julie") || cart.getName().equals("John")){
                     assertTrue(cart.containsProduct("Book"));
                 }
+
             }
 
         } catch (final RuntimeException e) {
@@ -148,6 +151,23 @@ class StoreTest {
             frank.addProductToCart(Store.getProductOffShelf(2));
             frank.addProductToCart(Store.getProductOffShelf(3));
             assertEquals(29.83, frank.purchaseCart());
+
+        }catch (final RuntimeException e){
+            fail(e);
+        }
+    }
+
+    @Test
+    @Order(12)
+    public void cartCanTotalTaxes(){
+        try{
+            Carts moppy = new Carts(8, "Moppy");
+            store.addShoppingCartToStore(moppy);
+            moppy.addProductToCart(Store.getProductOffShelf(1));
+            moppy.addProductToCart(Store.getProductOffShelf(2));
+            moppy.addProductToCart(Store.getProductOffShelf(3));
+            System.out.println(moppy.toString());
+            assertEquals(1.50, moppy.getCartTaxes());
 
         }catch (final RuntimeException e){
             fail(e);
