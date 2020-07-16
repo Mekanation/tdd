@@ -15,14 +15,18 @@ class StoreTest {
 
     @Test
     @Order(1)
-    public void returnsNoResultsWhenNoProductsArePurchased() throws Exception {
+    public void returnsNoResultsWhenNoProductsArePurchased() {
+        try{
+            List<Products> results = store.purchaseProducts(store.getCart());
+            assertEquals(0,results.size());
+        }catch (final RuntimeException e){
+            fail();
+        }
 
-        List<Products> results = store.purchaseProducts(store.getCart());
-        assertEquals(0,results.size());
     }
     @Test
     @Order(2)
-    public void setupProductsForFurtherTests() throws Exception {
+    public void setupProductsForFurtherTests() {
         try{
             store.addToCart(new Products("Book",12.49, true, false));
             store.addToCart(new Products("music CD", 14.99,false, false));
@@ -35,31 +39,47 @@ class StoreTest {
             store.addToCart(new Products("different imported box of chocolates", 11.25, true, true));
             assertTrue(true);
         }catch (final RuntimeException e){
-            System.out.println("Products were not implemented");
+            fail();
         }
     }
     @Test
     @Order(3)
-    public void returnsProductWhenProductIsSearched() throws Exception{
-        assertEquals("Book", store.cartContains("Book"));
+    public void returnsProductWhenProductIsSearched() {
+        try{
+            assertEquals("Book", store.cartContains("Book"));
+        }catch (final RuntimeException e){
+            fail();
+        }
+
     }
 
     @Test
     @Order(4)
-    public void returnsProductPriceWhenProductIsChosen() throws Exception{
-        assertEquals(12.49,store.getProductPrice("Book"));
+    public void returnsProductPriceWhenProductIsChosen() {
+        try{
+            assertEquals(12.49,store.getProductPrice("Book"));
+        }catch (final RuntimeException e){
+            fail();
+        }
+
     }
 
     @Test
     @Order(5)
-    public void returnsProductTaxWhenProductIsChosen(){
-        assertEquals(12.50, store.getProductTotal("Book"));
-        assertEquals(16.50, store.getProductTotal("music CD"));
+    public void returnsProductTaxWhenProductIsChosen() {
+        try{
+            assertEquals(12.50, store.getProductTotal("Book"));
+            assertEquals(16.50, store.getProductTotal("music CD"));
+        }catch (final RuntimeException e){
+            fail();
+        }
+
     }
 
     @Test
     @Order(6)
-    public void returnsProductTaxAndImportTaxWhenProductIsChosen(){
+    public void returnsProductTaxAndImportTaxWhenProductIsChosen() {
+
         assertEquals(54.65, store.getProductTotal("imported bottle of perfume"));
         assertEquals(16.50, store.getProductTotal("music CD"));
     }
@@ -67,18 +87,27 @@ class StoreTest {
     @Test
     @Order(7)
     public void affirmsOnlyOneStoreCanExist(){
-    try{
-        Store store2 = Store.getInstance();
-        if(System.identityHashCode(store) != System.identityHashCode(store2)){
-            fail("Store should not have been instantiate-able");
-        }
-        assertTrue(true);
+        try{
+            Store store2 = Store.getInstance();
+            if(System.identityHashCode(store) != System.identityHashCode(store2)){
+                fail("Store should not have been instantiate-able");
+            }
+            assertTrue(true);
 
-    }catch (final RuntimeException e){
-        System.out.println("Store was instantiated multiple times");
+        }catch (final RuntimeException e){
+            fail();
+        }
     }
 
+    @Test
+    @Order(8)
+    public void productsHaveIDs(){
+        try{
+            assertEquals(1, store.getProductIDinCart("Book"));
 
+        }catch (final RuntimeException e){
+            fail();
+        }
     }
 
 

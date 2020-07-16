@@ -59,4 +59,8 @@ public class Store {
         }
         return instance;
     }
+
+    public int getProductIDinCart(String productName) {
+        return 0;
+    }
 }
