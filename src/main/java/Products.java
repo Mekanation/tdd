@@ -19,12 +19,13 @@ public class Products {
         return productPrice;
     }
 
-    public double getPriceWithTax() {
+    public double getPriceWithTaxRounded() {
         if(exempt){
             return productPrice;
         }
-        return  (productPrice * .10) + productPrice;
+        return  Math.round(((productPrice * .10) + productPrice) * 20.00) / 20.00;
     }
+
     public boolean getExemptionStatus(){
         return exempt;
     }
