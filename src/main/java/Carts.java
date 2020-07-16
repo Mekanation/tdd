@@ -45,19 +45,14 @@ public class Carts {
         for(Products product : productsInCart){
             taxes += product.roundToTenths(product.getTaxes());
         }
-        return taxes;
-    }
-
-    public ArrayList<Products> getProductList() {
-        return productsInCart;
-
+        return Math.round(taxes * 100.00) / 100.00;
     }
 
     @Override
     public String toString() {
         for(Products products : productsInCart){
-            System.out.println("Price: " + products.getProductPrice() + "Taxes:" + products.getTaxes());
+            System.out.println("1 "+ products.getProductName() + " at: " + ( Math.round( (products.getProductPrice() + products.getTaxes()) *100.00)/100.00));
         }
-        return "done";
+        return "Thank you!";
     }
 }
