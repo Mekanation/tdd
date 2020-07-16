@@ -17,7 +17,7 @@ class StoreTest {
     @Order(1)
     public void returnsNoResultsWhenNoProductsArePurchased() {
         try{
-            List<Products> results = store.purchaseProducts(store.getCart());
+            List<Products> results = store.purchaseProducts(store.getProductsList());
             assertEquals(0,results.size());
         }catch (final RuntimeException e){
             fail();
@@ -28,15 +28,15 @@ class StoreTest {
     @Order(2)
     public void setupProductsForFurtherTests() {
         try{
-            store.addToCart(new Products("Book",12.49, true, false));
-            store.addToCart(new Products("music CD", 14.99,false, false));
-            store.addToCart(new Products("chocolate bar",0.85, true, false));
-            store.addToCart(new Products("imported box of chocolates", 10.00, true, true));
-            store.addToCart(new Products("imported bottle of perfume",47.50, false,true));
-            store.addToCart(new Products("imported cheaper bottle of perfume", 27.99,false,true));
-            store.addToCart(new Products("bottle of perfume", 18.99, false, false));
-            store.addToCart(new Products("packet of headache pills", 9.75, true,false));
-            store.addToCart(new Products("different imported box of chocolates", 11.25, true, true));
+            store.addToCart(new Products(1,"Book",12.49, true, false));
+            store.addToCart(new Products(2,"music CD", 14.99,false, false));
+            store.addToCart(new Products(3,"chocolate bar",0.85, true, false));
+            store.addToCart(new Products(4,"imported box of chocolates", 10.00, true, true));
+            store.addToCart(new Products(5,"imported bottle of perfume",47.50, false,true));
+            store.addToCart(new Products(6,"imported cheaper bottle of perfume", 27.99,false,true));
+            store.addToCart(new Products(7,"bottle of perfume", 18.99, false, false));
+            store.addToCart(new Products(8,"packet of headache pills", 9.75, true,false));
+            store.addToCart(new Products(9,"different imported box of chocolates", 11.25, true, true));
             assertTrue(true);
         }catch (final RuntimeException e){
             fail();
@@ -104,6 +104,19 @@ class StoreTest {
     public void productsHaveIDs(){
         try{
             assertEquals(1, store.getProductIDinCart("Book"));
+
+        }catch (final RuntimeException e){
+            fail();
+        }
+    }
+
+    @Test
+    @Order(9)
+    public void storeHasMultipleCarts(){
+        try{
+            store.createShoppingCart(new Carts(1, "Jim"));
+            store.createShoppingCart(new Carts(2, "Larry"));
+            assertEquals("Jim", store.getCartNameInStore(1));
 
         }catch (final RuntimeException e){
             fail();

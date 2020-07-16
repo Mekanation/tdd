@@ -2,12 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    private List<Products> cart;
+    private List<Products> productsList;
     private static Store instance = null;
+    private ArrayList<Carts> carts;
+
 
 
     private Store() {
-        cart = new ArrayList<>();
+        productsList = new ArrayList<>();
+        carts = new ArrayList<>();
 
     }
 
@@ -17,15 +20,15 @@ public class Store {
     }
 
     public void addToCart(Products product){
-        cart.add(product);
+        productsList.add(product);
     }
 
-    public List<Products> getCart() {
-        return cart;
+    public List<Products> getProductsList() {
+        return productsList;
     }
 
     public String cartContains(String productName) {
-        for (Products product : cart) {
+        for (Products product : productsList) {
             if (product.getProductName().equals(productName)) {
                 return product.getProductName();
             } else {
@@ -37,7 +40,7 @@ public class Store {
     }
 
     public double getProductPrice(String productName) {
-        for(Products product : cart){
+        for(Products product : productsList){
             if(product.getProductName().equals(productName)){
                 return product.getProductPrice();
             }
@@ -46,7 +49,7 @@ public class Store {
     }
 
     public double getProductTotal(String productName) {
-        for(Products product : cart){
+        for(Products product : productsList){
             if(product.getProductName().equals(productName)){
                 return product.getRoundedPrice(product.getPriceWithTax());
             }
@@ -61,6 +64,28 @@ public class Store {
     }
 
     public int getProductIDinCart(String productName) {
+        for(Products product : productsList){
+            if(product.getProductName().equals(productName)){
+                return product.getProductID();
+            }
+        }
         return 0;
     }
+
+    public void createShoppingCart(Carts cart) {
+        carts.add(cart);
+    }
+
+    public String getCartNameInStore(int id){
+        for(Carts cart : this.carts){
+            if(cart.getID() == id){
+                return cart.getName();
+            }
+        }
+        return "Cart not in Store";
+    }
+
+
+
+
 }

@@ -5,8 +5,10 @@ public class Products {
     private double productPrice;
     private boolean exempt;
     private boolean imported;
+    private int productID;
 
-    public Products(String productName, double productPrice, boolean exempt, boolean imported) {
+    public Products(int productID, String productName, double productPrice, boolean exempt, boolean imported) {
+        this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.exempt = exempt;
@@ -44,5 +46,9 @@ public class Products {
     }
     public boolean getImportStatus(){
         return imported;
+    }
+
+    public int getProductID() {
+        return productID;
     }
 }
